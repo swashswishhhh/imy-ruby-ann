@@ -1,0 +1,13 @@
+/* ============================================================
+   Rubby Ann — Date Planner · stylesheet hub
+   Styles are organized per act for easy debugging:
+     styles/base.css      → design tokens, shell, transitions, shared card
+     styles/actOne.css    → hero, question card, YES/NO buttons
+     styles/actTwo.css    → planner: surprise card, categories, fields, CTA
+     styles/actThree.css  → digital ticket confirmation
+   ============================================================ */
+
+@import './styles/base.css';
+@import './styles/actOne.css';
+@import './styles/actTwo.css';
+@import './styles/actThree.css';

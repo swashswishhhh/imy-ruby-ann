@@ -1,0 +1,254 @@
+/* ============================================================
+   Act 3 — The Digital Ticket
+   ============================================================ */
+
+.ticket-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 40;
+}
+
+/* ---- Ticket SVG icon ---- */
+
+.ticket__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.ticket__svg-icon {
+  width: 52px;
+  height: 52px;
+  animation: breathe 3.5s ease-in-out infinite;
+  filter: drop-shadow(0 4px 10px rgba(184,92,120,0.3));
+}
+
+/* ---- Ticket wrapper ---- */
+
+.ticket {
+  position: relative;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-top: 3px solid var(--primary);
+  border-bottom: 3px solid var(--primary);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  animation: ticketIn 0.85s var(--spring) both 0.15s;
+}
+
+/* Floral watermark inside ticket */
+.ticket::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg opacity='.06'%3E%3Ccircle cx='100' cy='75' r='24' fill='%23b85c78'/%3E%3Ccircle cx='125' cy='100' r='24' fill='%23b85c78'/%3E%3Ccircle cx='100' cy='125' r='24' fill='%23b85c78'/%3E%3Ccircle cx='75' cy='100' r='24' fill='%23b85c78'/%3E%3Ccircle cx='100' cy='100' r='18' fill='%23d4889e'/%3E%3Ccircle cx='100' cy='40' r='14' fill='%238fab8e'/%3E%3Ccircle cx='155' cy='100' r='14' fill='%238fab8e'/%3E%3Ccircle cx='100' cy='160' r='14' fill='%238fab8e'/%3E%3Ccircle cx='45' cy='100' r='14' fill='%238fab8e'/%3E%3C/g%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes ticketIn {
+  from { opacity: 0; transform: translateY(36px) rotate(-1.2deg) scale(0.95); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---- Ticket header ---- */
+
+.ticket__top {
+  text-align: center;
+  padding: clamp(1.75rem, 5vw, 2.5rem) clamp(1.25rem, 4vw, 2.25rem) 1.3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.ticket__badge {
+  display: inline-block;
+  font-family: 'Lato', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--primary);
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  margin-bottom: 0.9rem;
+}
+
+.ticket__title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.8rem, 5.5vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.12;
+  color: var(--ink);
+}
+
+.ticket__sub {
+  margin-top: 0.45rem;
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+}
+
+/* ---- Perforation ---- */
+
+.ticket__perf {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0 -2px;
+  z-index: 1;
+}
+
+.ticket__notch {
+  flex: 0 0 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+}
+
+.ticket__notch--left  { margin-left:  -13px; }
+.ticket__notch--right { margin-right: -13px; }
+
+.ticket__dash {
+  flex: 1;
+  border-top: 1.5px dashed var(--border);
+}
+
+/* ---- Itemized breakdown ---- */
+
+.ticket__body {
+  padding: 1.25rem clamp(1.25rem, 4vw, 2.25rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.ticket__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-family: 'Lato', monospace;
+  padding: 0.6rem 0;
+  border-bottom: 1px dotted var(--border);
+  transition: background 0.18s ease;
+}
+
+.ticket__row:last-child {
+  border-bottom: none;
+}
+
+.ticket__key {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--primary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ticket__val {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--ink);
+  text-align: right;
+  word-break: break-word;
+}
+
+/* ---- Ticket stub footer ---- */
+
+.ticket__stub {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.9rem clamp(1.25rem, 4vw, 2.25rem) 1.1rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--primary);
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Footnote ---- */
+
+.ticket__footnote {
+  margin-top: 0.85rem;
+  text-align: center;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* ---- Share actions ---- */
+
+.ticket-actions {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.share-btn {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  padding: 0.85rem 2.2rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.22s var(--spring),
+    box-shadow 0.22s ease,
+    background 0.22s ease,
+    color 0.22s ease,
+    border-color 0.22s;
+}
+
+.share-btn:hover {
+  transform: translateY(-2px);
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+  box-shadow: 0 10px 28px -8px rgba(184,92,120,0.45);
+}
+
+.share-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 480px) {
+  .ticket__stub {
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: center;
+    text-align: center;
+  }
+  .ticket__row { gap: 0.5rem; }
+  .ticket__val { font-size: 0.8rem; }
+  .ticket__key { font-size: 0.65rem; }
+  .share-btn { width: 100%; }
+}

@@ -1,0 +1,351 @@
+/* ============================================================
+   Act 2 — The Date Planner
+   ============================================================ */
+
+/* ---------- Header ---------- */
+
+.planner__badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: var(--petal);
+  border: 1px solid var(--petal-mid);
+  padding: 0.4rem 1.1rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+
+.planner__title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.85rem, 5.5vw, 3rem);
+  font-weight: 700;
+  color: var(--ink);
+  text-align: center;
+  line-height: 1.15;
+}
+
+.planner__title em {
+  font-style: italic;
+  color: var(--primary);
+}
+
+.planner__text {
+  margin-top: 0.85rem;
+  text-align: center;
+  color: var(--ink-soft);
+  font-weight: 300;
+  font-size: clamp(0.9rem, 2.2vw, 1rem);
+  line-height: 1.7;
+}
+
+/* ---------- Master "Surprise Me" card ---------- */
+
+.surprise-card {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 1.75rem 0 1.5rem;
+  padding: 1.2rem 1.3rem;
+  background: var(--surface-alt);
+  border: 1.5px dashed var(--secondary);
+  border-radius: var(--radius);
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s var(--spring),
+    box-shadow 0.3s ease;
+}
+
+.surprise-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--primary);
+}
+
+.surprise-card--on {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.surprise-card--on .surprise-card__sub {
+  color: rgba(255,255,255,0.8);
+}
+
+.surprise-card__input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.surprise-card__box {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: transform 0.25s var(--spring);
+}
+
+.surprise-card--on .surprise-card__box {
+  border-color: rgba(255,255,255,0.5);
+  color: var(--primary);
+  transform: scale(1.08);
+}
+
+.surprise-card__title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--ink);
+}
+
+.surprise-card--on .surprise-card__title {
+  color: var(--white);
+}
+
+.surprise-card__sub {
+  font-size: 0.83rem;
+  color: var(--ink-soft);
+  margin-top: 0.1rem;
+}
+
+/* ---------- Categories ---------- */
+
+.category {
+  margin: 1.75rem 0;
+  opacity: 1;
+  transition: opacity 0.4s ease, filter 0.4s ease;
+}
+
+.category--dimmed {
+  opacity: 0.3;
+  filter: saturate(0.3);
+  pointer-events: none;
+}
+
+.category__title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.1rem, 3vw, 1.35rem);
+  font-weight: 700;
+  color: var(--ink);
+  text-align: left;
+}
+
+.category__hint {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin: 0.2rem 0 0.85rem;
+  text-align: left;
+}
+
+.option-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.65rem;
+}
+
+.option-card {
+  position: relative;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 0.75rem;
+  cursor: pointer;
+  text-align: center;
+  transition:
+    transform 0.22s var(--spring),
+    box-shadow 0.22s ease,
+    background 0.22s ease,
+    border-color 0.22s ease;
+  line-height: 1.4;
+}
+
+.option-card:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px -10px rgba(184,92,120,0.3);
+  border-color: var(--secondary);
+  background: var(--petal);
+}
+
+.option-card:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.option-card--active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+  box-shadow: 0 8px 24px -8px rgba(184,92,120,0.45);
+  animation: activePop 0.3s var(--spring);
+}
+
+.option-card__check {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  background: var(--sage);
+  color: var(--white);
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  font-size: 0.65rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(143,171,142,0.5);
+}
+
+/* ---------- Form fields ---------- */
+
+.field {
+  margin: 1.4rem 0;
+  text-align: left;
+}
+
+.field__label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+/* Petal accent on label */
+.field__label::before {
+  content: '';
+  display: block;
+  width: 3px;
+  height: 0.95rem;
+  background: var(--primary);
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.field__input,
+.field__textarea {
+  width: 100%;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.92rem;
+  color: var(--ink);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 1rem;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.field__textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.field__input::placeholder,
+.field__textarea::placeholder {
+  color: var(--muted);
+  font-weight: 300;
+}
+
+.field__input:focus,
+.field__textarea:focus {
+  outline: none;
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 3px rgba(184,92,120,0.12);
+}
+
+/* ---------- Final CTA ---------- */
+
+.cta {
+  display: block;
+  width: 100%;
+  margin-top: 1.75rem;
+  font-family: 'Lato', sans-serif;
+  font-size: clamp(0.95rem, 2.4vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--primary);
+  border: none;
+  border-radius: 999px;
+  padding: 1.05rem 2rem;
+  cursor: pointer;
+  box-shadow: 0 8px 28px -8px rgba(184,92,120,0.45);
+  transition:
+    transform 0.22s var(--spring),
+    box-shadow 0.25s ease,
+    background 0.22s ease,
+    opacity 0.25s ease;
+}
+
+.cta:hover:not(:disabled) {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px -8px rgba(143,58,85,0.5);
+}
+
+.cta:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.cta--loading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  opacity: 0.85;
+  cursor: wait;
+}
+
+.spinner {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-top-color: var(--white);
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.cta-hint {
+  margin-top: 0.7rem;
+  text-align: center;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 480px) {
+  .option-grid { grid-template-columns: 1fr 1fr; gap: 0.55rem; }
+  .option-card  { font-size: 0.82rem; padding: 0.75rem 0.5rem; }
+  .surprise-card { gap: 0.75rem; padding: 1rem; }
+  .planner__title { font-size: clamp(1.6rem, 7vw, 2.2rem); }
+}

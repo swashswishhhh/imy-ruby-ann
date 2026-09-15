@@ -1,0 +1,277 @@
+/* ============================================================
+   Rubby Ann — Date Planner · Design System (base)
+   Palette — Soft Romantic (no gradients):
+     Cream Blush      #fdf6f0  (background)
+     Deep Rose        #b85c78  (primary)
+     Dusty Mauve      #d4889e  (secondary)
+     Sage Green       #8fab8e  (floral accent)
+     Warm Parchment   #f9ede6  (card surface)
+     Deep Cocoa       #3d2424  (text)
+     Muted Clay       #9b7070  (muted text)
+   Type: Cormorant Garamond (headings) · Lato (body)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Lato:wght@300;400;700&family=Dancing+Script:wght@700&display=swap');
+
+:root {
+  /* Core palette — NO gradients */
+  --bg:          #fdf6f0;
+  --surface:     #ffffff;
+  --surface-alt: #fef9f6;
+  --primary:     #b85c78;
+  --primary-dark:#8f3a55;
+  --secondary:   #d4889e;
+  --sage:        #8fab8e;
+  --sage-light:  #d6e8d8;
+  --petal:       #f7dde6;
+  --petal-mid:   #eebece;
+  --ink:         #3d2424;
+  --ink-soft:    #7a5757;
+  --muted:       #b89898;
+  --border:      #edd5dc;
+  --white:       #ffffff;
+
+  /* Geometry */
+  --radius:    1.5rem;
+  --radius-sm: 0.9rem;
+  --shadow:    0 12px 40px -8px rgba(184,92,120,0.18);
+  --shadow-sm: 0 4px 16px -4px rgba(184,92,120,0.12);
+  --spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ---- Reset ---- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body, #root {
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Lato', system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   App shell
+   ============================================================ */
+
+.app {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh; /* dynamic viewport height for mobile */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 1rem 2.5rem;
+  overflow: hidden;
+}
+
+/* Soft linen texture overlay */
+.app::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(247,221,230,0.45) 0%, transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(214,232,216,0.35) 0%, transparent 40%),
+    radial-gradient(circle at 60% 10%, rgba(212,136,158,0.12) 0%, transparent 35%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================================
+   Floral corner decorations (SVG-based)
+   ============================================================ */
+
+.floral-corner {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.55;
+}
+.floral-corner--tl { top: -10px;  left: -10px;  }
+.floral-corner--tr { top: -10px;  right: -10px; transform: scaleX(-1); }
+.floral-corner--bl { bottom: -10px; left: -10px;  transform: scaleY(-1); }
+.floral-corner--br { bottom: -10px; right: -10px; transform: scale(-1); }
+.floral-corner svg { width: clamp(140px, 22vw, 240px); height: auto; }
+
+/* Floating petals */
+.petal-float {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1;
+  animation: petalDrift 10s ease-in-out infinite;
+  opacity: 0.4;
+}
+
+@keyframes petalDrift {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25%       { transform: translate(8px, -12px) rotate(15deg); }
+  50%       { transform: translate(-6px, -8px) rotate(-8deg); }
+  75%       { transform: translate(10px, -4px) rotate(20deg); }
+}
+
+/* ============================================================
+   Music player button
+   ============================================================ */
+
+.music-btn {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.85rem 0.5rem 0.65rem;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  color: var(--primary);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: background 0.25s, color 0.25s, box-shadow 0.25s, transform 0.2s var(--spring);
+}
+.music-btn:hover {
+  background: var(--petal);
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+.music-btn svg {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+.music-btn--muted { color: var(--muted); border-color: #e8d8d8; }
+.music-btn--muted:hover { background: var(--surface-alt); color: var(--primary); }
+.music-btn__label { white-space: nowrap; }
+
+/* Animated equalizer bars */
+.music-btn__bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+  margin-left: 1px;
+}
+.music-btn__bars i {
+  display: block;
+  width: 2px;
+  background: var(--primary);
+  border-radius: 999px;
+  animation: barBounce 0.9s ease-in-out infinite;
+}
+.music-btn__bars i:nth-child(1) { height: 5px;  animation-delay: 0s; }
+.music-btn__bars i:nth-child(2) { height: 10px; animation-delay: 0.18s; }
+.music-btn__bars i:nth-child(3) { height: 7px;  animation-delay: 0.36s; }
+.music-btn__bars i:nth-child(4) { height: 4px;  animation-delay: 0.09s; }
+
+@keyframes barBounce {
+  0%, 100% { transform: scaleY(0.5); }
+  50%       { transform: scaleY(1.5); }
+}
+
+/* ============================================================
+   Act container & transitions
+   ============================================================ */
+
+.act {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 680px;
+  animation: actIn 0.7s var(--spring) both;
+}
+
+@keyframes actIn {
+  from { opacity: 0; transform: translateY(28px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+.act--leaving {
+  animation: actOut 0.4s ease-in both;
+}
+@keyframes actOut {
+  from { opacity: 1; transform: none; }
+  to   { opacity: 0; transform: translateY(-24px) scale(0.97); }
+}
+
+/* ============================================================
+   Card
+   ============================================================ */
+
+.card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(1.75rem, 6vw, 3rem);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Delicate floral watermark inside card */
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: -24px;
+  right: -24px;
+  width: 120px;
+  height: 120px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='35' r='12' fill='%23f7dde6' opacity='.6'/%3E%3Ccircle cx='65' cy='50' r='12' fill='%23f7dde6' opacity='.6'/%3E%3Ccircle cx='50' cy='65' r='12' fill='%23f7dde6' opacity='.6'/%3E%3Ccircle cx='35' cy='50' r='12' fill='%23f7dde6' opacity='.6'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%23eebece' opacity='.5'/%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* ============================================================
+   CSS Confetti (Act 2)
+   ============================================================ */
+
+.confetti {
+  position: fixed;
+  top: -12px;
+  width: 8px;
+  height: 8px;
+  pointer-events: none;
+  animation: fall linear forwards;
+  z-index: 50;
+  border-radius: 2px;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(540deg); opacity: 0.2; }
+}
+
+@keyframes activePop {
+  from { transform: scale(0.9); }
+  to   { transform: scale(1); }
+}
+
+/* ============================================================
+   Responsive base
+   ============================================================ */
+
+@media (max-width: 480px) {
+  .app { padding: 4.5rem 0.75rem 2rem; }
+  .floral-corner svg { width: 100px; }
+  .music-btn__label { display: none; }
+  .music-btn { padding: 0.5rem 0.65rem; gap: 0.3rem; }
+}

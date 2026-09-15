@@ -1,0 +1,201 @@
+/* ============================================================
+   Act 1 — The Question
+   ============================================================ */
+
+/* ---------- Hero ---------- */
+
+.hero {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: var(--petal);
+  border: 1px solid var(--petal-mid);
+  padding: 0.45rem 1.2rem;
+  border-radius: 999px;
+  margin-bottom: 1.25rem;
+}
+
+/* Tiny rose icon in eyebrow */
+.hero__eyebrow::before,
+.hero__eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: var(--primary);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  flex-shrink: 0;
+}
+
+.hero__title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(2.8rem, 9vw, 5rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.hero__title em {
+  font-style: italic;
+  color: var(--primary);
+}
+
+.hero__sub {
+  margin-top: 0.9rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  font-weight: 300;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+
+/* ---------- Question card ---------- */
+
+.card__question {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.6rem, 5vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.card__question .accent {
+  color: var(--primary);
+  font-style: italic;
+  font-weight: 700;
+}
+
+/* Floral divider */
+.card__divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 1.5rem auto;
+}
+
+.card__divider::before,
+.card__divider::after {
+  content: '';
+  flex: 1;
+  max-width: 80px;
+  height: 1px;
+  background: var(--border);
+}
+
+/* SVG rose bud in the center of divider */
+.card__divider-icon {
+  display: inline-block;
+  animation: breathe 3s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.12); }
+}
+
+/* ---------- Button pair ---------- */
+
+.button-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  min-height: 110px;
+  flex-wrap: nowrap;
+}
+
+.btn {
+  font-family: 'Lato', sans-serif;
+  border: none;
+  cursor: pointer;
+  border-radius: 999px;
+  transition: transform 0.25s var(--spring), box-shadow 0.25s ease;
+  will-change: transform;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+
+/* YES button — solid, no gradient */
+.btn--yes {
+  background: var(--primary);
+  color: var(--white);
+  font-weight: 700;
+  font-size: clamp(1rem, 2.8vw, 1.25rem);
+  padding: 1rem 2.6rem;
+  letter-spacing: 0.06em;
+  box-shadow: 0 8px 28px -8px rgba(184,92,120,0.5);
+  animation: heartPulse 2.2s ease-in-out infinite;
+}
+
+.btn--yes:hover {
+  background: var(--primary-dark);
+  transform: scale(var(--yes-scale, 1)) translateY(-3px);
+  box-shadow: 0 14px 36px -8px rgba(143,58,85,0.55);
+}
+
+@keyframes heartPulse {
+  0%, 100% { box-shadow: 0 8px 28px -8px rgba(184,92,120,0.5), 0 0 0 0 rgba(184,92,120,0.3); }
+  50%       { box-shadow: 0 8px 28px -8px rgba(184,92,120,0.5), 0 0 0 12px rgba(184,92,120,0); }
+}
+
+/* NO button — soft, no gradient */
+.btn--no {
+  background: var(--surface-alt);
+  color: var(--ink-soft);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.9rem 2rem;
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 5;
+}
+
+.btn--no--dodging {
+  position: fixed;
+  margin: 0;
+}
+
+/* Playful tease note */
+.tease-note {
+  margin-top: 0.5rem;
+  min-height: 1.4rem;
+  font-size: 0.88rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--muted);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.35s ease, transform 0.35s var(--spring);
+}
+
+.tease-note--show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 480px) {
+  .button-row { gap: 0.75rem; min-height: 90px; }
+  .btn--yes { padding: 0.9rem 2rem; font-size: 1rem; }
+  .btn--no  { padding: 0.8rem 1.5rem; }
+  .hero__title { font-size: clamp(2.3rem, 10vw, 3.5rem); }
+  .card__question { font-size: clamp(1.4rem, 6vw, 2rem); }
+}
