@@ -120,7 +120,7 @@ export default function ActThree({ selection }) {
     const text = [
       '🎟️ OFFICIAL DATE TICKET 💜',
       '────────────────────────',
-      'GUEST OF HONOR: Rubby Ann',
+      'GUEST OF HONOR: Ruby Ann',
       `OPENING VIBE:   ${vibe}`,
       `MAIN EVENT:     ${mainEvent}`,
       `DINING:         ${food}`,
@@ -128,7 +128,7 @@ export default function ActThree({ selection }) {
       `NOTES:          ${notes}`,
       `TICKET NO.      ${ticketNo}`,
       '────────────────────────',
-      '— Kenneth ♡ Rubby Ann',
+      '— Kenneth ♡ Ruby Ann',
     ].join('\n')
 
     try {
@@ -159,7 +159,7 @@ export default function ActThree({ selection }) {
             </svg>
           </div>
           <span className="ticket__badge">ADMIT TWO · ONE PERFECT EVENING</span>
-          <h1 className="ticket__title">It's a Date, Rubby Ann!</h1>
+          <h1 className="ticket__title">It's a Date, Ruby Ann!</h1>
           <p className="ticket__sub">
             Screenshot this ticket and send it to your lover
           </p>
@@ -176,7 +176,7 @@ export default function ActThree({ selection }) {
         <div className="ticket__body">
           <div className="ticket__row">
             <span className="ticket__key">GUEST OF HONOR</span>
-            <span className="ticket__val">Rubby Ann</span>
+            <span className="ticket__val">Ruby Ann</span>
           </div>
           <div className="ticket__row">
             <span className="ticket__key">OPENING VIBE</span>
@@ -204,7 +204,7 @@ export default function ActThree({ selection }) {
         <div className="ticket__stub">
           <span>TICKET NO. {ticketNo}</span>
           <span>ISSUED {issued.toUpperCase()}</span>
-          <span>KENNETH ♡ RUBBY ANN</span>
+          <span>KENNETH ♡ RUBY ANN</span>
         </div>
       </div>
 

@@ -86,7 +86,7 @@ export default function ActTwo({ onSubmitted }) {
         <div style={{ textAlign: 'center' }}>
           <span className="planner__badge">Act 2 · The Date Planner</span>
           <h1 className="planner__title">
-            Let's Plan Our Date, <em>Rubby Ann</em>
+            Let's Plan Our Date, <em>Ruby Ann</em>
           </h1>
           <p className="planner__text">
             Pick whatever makes you happiest — every choice is the right one.

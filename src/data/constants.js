@@ -12,7 +12,7 @@ export const TEASE_NOTES = [
   'It seems to have a mind of its own…',
   'The universe is trying to tell you something ✨',
   'That button is legally not clickable 💜',
-  'Just click YES already, Rubby Ann 🥺',
+  'Just click YES already, Ruby Ann 🥺',
 ]
 
 /** Random-coordinate padding (px) kept clear of screen edges when NO dodges. */

@@ -1,6 +1,6 @@
-# 💜 Rubby Ann — Date Planner
+# 💜 Ruby Ann — Date Planner
 
-A three-act interactive web app that asks Rubby Ann out on a date, lets her
+A three-act interactive web app that asks Ruby Ann out on a date, lets her
 plan the perfect evening, and produces a beautiful **shareable ticket** she
 can screenshot and send straight to her lover.
 

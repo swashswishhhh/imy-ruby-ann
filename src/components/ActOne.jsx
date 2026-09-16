@@ -71,7 +71,7 @@ export default function ActOne({ onYes }) {
       <header className="hero">
         <span className="hero__eyebrow">A Very Important Message</span>
         <h1 className="hero__title">
-          Hey <em>Rubby Ann</em>
+          Hey <em>Ruby Ann</em>
         </h1>
         <p className="hero__sub">I have a very special question for you…</p>
       </header>
